@@ -1,0 +1,10 @@
+- Create admission form
+- Fix Floating Action Button bugs
+- Add crop image feature in patient registration
+- Update UI to follow material design
+- Add expandable FAB for provider dashboard
+- Add empty active visits view
+- Mark patient deceased using coded response
+- Removed swipe actions in provider dashboard
+- Fix the reverse flipping bug in patient dashboard
+- Add allergy tab to fetch allergies from server

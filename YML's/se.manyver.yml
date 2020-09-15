@@ -1,0 +1,1507 @@
+Categories:
+  - Connectivity
+License: MPL-2.0
+AuthorName: André Staltz
+AuthorEmail: andre@staltz.com
+AuthorWebSite: https://staltz.com/
+WebSite: https://manyver.se
+SourceCode: https://gitlab.com/staltz/manyverse/tree/HEAD
+IssueTracker: https://gitlab.com/staltz/manyverse/issues
+Translation: https://gitlab.com/staltz/manyverse/-/blob/master/TRANSLATING.md
+Changelog: https://gitlab.com/staltz/manyverse/blob/HEAD/CHANGELOG.md
+OpenCollective: manyverse
+Bitcoin: 3NNGfHL96UrjggaBVQojF1mnGnXNx1SXv7
+
+AutoName: Manyverse
+Description: |-
+    Manyverse is a social network app using the SSB protocol (Secure Scuttlebutt)
+    where you can write posts and share with friends nearby or over the internet.
+    It’s different from mainstream social networks because your data is yours, it
+    lives on your phone, not in the cloud. So there is no login, no company
+    holding your data, no ads, no tracking of your activity, it’s just you and
+    your friends! The app is free and open source software, and it will always
+    remain free.
+
+    '''Features:'''
+
+    * Write posts (even when offline)
+    * Share posts to friends over the internet or nearby (in the same Wi-Fi or with Bluetooth)
+    * Scroll through many conversations with friends and add your own comments
+    * Likes
+    * More features as we develop the app!
+
+RepoType: git
+Repo: https://gitlab.com/staltz/manyverse.git
+
+Builds:
+  - versionName: 0.18.10-02.beta
+    versionCode: 30
+    commit: v0.18.10-02.beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1810.16-beta
+    versionCode: 32
+    commit: v0.1810.16-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1810.24-beta
+    versionCode: 34
+    commit: v0.1810.24-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1811.12-beta
+    versionCode: 35
+    commit: v0.1811.12-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1811.14-beta
+    versionCode: 36
+    commit: v0.1811.14-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1811.21-beta
+    versionCode: 37
+    disable: build fails
+    commit: v0.1811.21-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1811.28-beta
+    versionCode: 38
+    disable: build fails
+    commit: v0.1811.28-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1812.29-beta
+    versionCode: 39
+    disable: build fails
+    commit: v0.1812.29-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1901.2-beta
+    versionCode: 40
+    commit: v0.1901.2-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1901.5-beta
+    versionCode: 42
+    disable: build fails
+    commit: v0.1901.5-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1901.14-beta.b
+    versionCode: 44
+    disable: build fails
+    commit: v0.1901.14-beta.b
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1901.16-beta
+    versionCode: 45
+    disable: build fails
+    commit: v0.1901.16-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1901.21-beta
+    versionCode: 46
+    disable: build fails
+    commit: v0.1901.21-beta
+    subdir: android/app
+    sudo:
+      - apt-get install -y g++
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v8.11.4/node-v8.11.4-linux-x64.tar.xz
+      - echo "85ea7cbb5bf624e130585bfe3946e99c85ce5cb84c2aee474038bdbe912f908c node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v8.11.4-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1901.23-beta
+    versionCode: 47
+    commit: v0.1901.23-beta
+    subdir: android/app
+    sudo:
+      - apt-get update
+      - apt-get install -y --no-install-recommends g++ ninja-build -t stretch-backports
+        npm
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1902.27-beta
+    versionCode: 48
+    commit: v0.1902.27-beta
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ ninja-build -t stretch-backports
+        npm
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1903.4-beta
+    versionCode: 49
+    commit: v0.1903.4-beta
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ ninja-build -t stretch-backports
+        npm
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1903.13-beta
+    versionCode: 50
+    commit: v0.1903.13-beta
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ ninja-build -t stretch-backports
+        npm
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1903.19-beta
+    versionCode: 51
+    commit: v0.1903.19-beta
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ ninja-build -t stretch-backports
+        npm
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1903.20-beta
+    versionCode: 52
+    commit: v0.1903.20-beta
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ ninja-build -t stretch-backports
+        npm
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1903.22-beta
+    versionCode: 53
+    commit: v0.1903.22-beta
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ ninja-build -t stretch-backports
+        npm
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1904.8-beta
+    versionCode: 54
+    commit: v0.1904.8-beta
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ ninja-build -t stretch-backports
+        npm
+      - npm install -g react-native-cli
+    init:
+      - sed -i -e '/appium/d' ../../package.json
+      - npm install
+      - truncate -s 0 ../../node_modules/react-native/local-cli/server/util/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.1.7
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/infer-annotations/infer-annotations-4.0.jar
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/sodium-native/prebuilds/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - npm run build-android-assets
+    ndk: r17b
+
+  - versionName: 0.1909.2-beta
+    versionCode: 68
+    commit: v0.1909.2-beta.c
+    timeout: 20000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.1909.5-beta
+    versionCode: 69
+    commit: v0.1909.5-beta
+    timeout: 20000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.1909.11-beta
+    versionCode: 70
+    commit: v0.1909.11-beta
+    timeout: 20000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - yes
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/*/build/Release/*.node
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.1910.15-beta
+    versionCode: 75
+    commit: c4e3c34909d9218d67e54240bc1cbfab1569c67b
+    timeout: 20000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.1910.31-beta
+    versionCode: 76
+    commit: v0.1910.31-beta
+    timeout: 20000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.1911.19-beta
+    versionCode: 77
+    commit: v0.1911.19-beta
+    timeout: 20000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.1911.27-beta
+    versionCode: 78
+    commit: v0.1911.27-beta
+    timeout: 20000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - node_modules/react-native-android-wifi/Examples/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.2001.7-beta
+    versionCode: 79
+    commit: v0.2001.7-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.2002.4-beta
+    versionCode: 80
+    commit: v0.2002.4-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - e2e/apple-app-store-demo
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.2003.4-beta
+    versionCode: 82
+    commit: v0.2003.4-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    patch:
+      - build.patch
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - e2e/apple-app-store-demo
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.2004.4-beta
+    versionCode: 83
+    commit: v0.2004.4-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    patch:
+      - build.patch
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - e2e/apple-app-store-demo
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.2005.5-beta
+    versionCode: 84
+    disable: broken APK
+    commit: v0.2005.5-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    patch:
+      - build.patch
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - e2e/apple-app-store-demo
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.2005.28-beta
+    versionCode: 85
+    disable: broken APK
+    commit: v0.2005.28-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz
+      - echo "d2271fd8cf997fa7447d638dfa92749ff18ca4b0d796bf89f2a82bf7800d5506 node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v10.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    patch:
+      - build.patch
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.2.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - e2e/apple-app-store-demo
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r19c
+
+  - versionName: 0.2005.31-beta
+    versionCode: 86
+    commit: v0.2005.31-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v12.16.3/node-v12.16.3-linux-x64.tar.xz
+      - echo "1956e196e3c3c8ef5f0c45db76d7c1245af4ccdda2b7ab30a57ce91d6e165caa node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v12.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    patch:
+      - build.patch
+    gradle:
+      - indie
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.3.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - e2e/apple-app-store-demo
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r21b
+
+  - versionName: 0.2006.5-beta-fdroid
+    versionCode: 87
+    commit: v0.2006.5-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v12.16.3/node-v12.16.3-linux-x64.tar.xz
+      - echo "1956e196e3c3c8ef5f0c45db76d7c1245af4ccdda2b7ab30a57ce91d6e165caa node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v12.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    patch:
+      - build.patch
+    gradle:
+      - fdroid
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.3.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - e2e/apple-app-store-demo
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+      - node_modules/react-native-localize/android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r21b
+
+  - versionName: 0.2007.3-beta-fdroid
+    versionCode: 88
+    disable: fails to build
+    commit: v0.2007.3-beta
+    timeout: 30000
+    subdir: android/app
+    sudo:
+      - apt-get update || apt-get update
+      - apt-get install -y --no-install-recommends g++ lib32stdc++-6-dev libc6-dev-i386
+        ninja-build linux-libc-dev linux-libc-dev:i386
+      - curl -Lo node.tar.xz https://nodejs.org/dist/v12.16.3/node-v12.16.3-linux-x64.tar.xz
+      - echo "1956e196e3c3c8ef5f0c45db76d7c1245af4ccdda2b7ab30a57ce91d6e165caa node.tar.xz"
+        | sha256sum -c -
+      - tar xJf node.tar.xz
+      - cp -a node-v12.16.3-linux-x64/. /usr/local/
+      - npm install -g react-native-cli
+    init:
+      - npm install --no-optional
+      - truncate -s 0 ../../node_modules/react-native/node_modules/@react-native-community/cli/build/commands/server/external/xsel
+    patch:
+      - build.patch
+    gradle:
+      - fdroid
+    srclibs:
+      - NodejsMobile@nodejs-mobile-v0.3.1
+    rm:
+      - node_modules/react-native/ReactAndroid/src/main/third-party/java/buck-android-support/buck-android-support.jar
+      - node_modules/react-native/template/
+      - e2e/apple-app-store-demo
+    prebuild: sed -i -e '/lifecycle/d' ../build.gradle
+    scanignore:
+      - android/build.gradle
+      - node_modules/react-native-localize/android/build.gradle
+    scandelete:
+      - node_modules
+    build:
+      - pushd $$NodejsMobile$$
+      - ./tools/android_build.sh $$NDK$$ arm
+      - ./tools/android_build.sh $$NDK$$ arm64
+      - popd
+      - mv $$NodejsMobile$$/out_android/armeabi-v7a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/armeabi-v7a/libnode.so
+      - mv $$NodejsMobile$$/out_android/arm64-v8a/libnode.so ../../node_modules/nodejs-mobile-react-native/android/libnode/bin/arm64-v8a/libnode.so
+      - npm run build-android-assets
+    ndk: r21d
+
+MaintainerNotes: scanignore is used to allow the "node_modules/react-native/android"
+    local Maven repository which contains the prebuilt react-native library which
+    we get from npm.
+
+AutoUpdateMode: Version +-fdroid v%v
+UpdateCheckMode: Tags
+CurrentVersion: 0.2007.3-beta-fdroid
+CurrentVersionCode: 88

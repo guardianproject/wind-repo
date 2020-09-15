@@ -1,0 +1,29 @@
+--- a/android/app/build.gradle
++++ b/android/app/build.gradle
+@@ -173,14 +173,6 @@
+         //     keyPassword 'android'
+         // }
+         release {
+-            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+-                storeFile file(MYAPP_RELEASE_STORE_FILE)
+-                storePassword MYAPP_RELEASE_STORE_PASSWORD
+-                keyAlias MYAPP_RELEASE_KEY_ALIAS
+-                keyPassword MYAPP_RELEASE_KEY_PASSWORD
+-            } else {
+-                throw new Exception('Refusing to make release build with wrong keystore')
+-            }
+         }
+     }
+ 
+@@ -203,11 +195,6 @@
+             // signingConfig signingConfigs.debug
+             minifyEnabled enableProguardInReleaseBuilds
+             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+-            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+-                signingConfig signingConfigs.release
+-            } else {
+-                throw new Exception('Refusing to make release build with wrong keystore')
+-            }
+         }
+     }
+ 

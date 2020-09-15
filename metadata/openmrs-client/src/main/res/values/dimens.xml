@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ The contents of this file are subject to the OpenMRS Public License
+  ~ Version 1.0 (the "License"); you may not use this file except in
+  ~ compliance with the License. You may obtain a copy of the License at
+  ~ http://license.openmrs.org
+  ~
+  ~ Software distributed under the License is distributed on an "AS IS"
+  ~ basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+  ~ License for the specific language governing rights and limitations
+  ~ under the License.
+  ~
+  ~ Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+  -->
+
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="dashboard_icon_height_width">80dp</dimen>
+    <dimen name="dashboard_icon_margin">20dp</dimen>
+    <dimen name="dashboard_text_size">18sp</dimen>
+    <dimen name="dashboard_text_top_margin">10dp</dimen>
+    <dimen name="dashboard_text_bottom_margin">15dp</dimen>
+    <dimen name="settings_list_text_title_size">16sp</dimen>
+    <dimen name="settings_icon_size">24dp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="information_icon_size">48dp</dimen>
+    <dimen name="margin_short">8dp</dimen>
+    <dimen name="margin_long">16dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="size_sub_body">14sp</dimen>
+    <dimen name="label_margin_wide">32dp</dimen>
+    <dimen name="big_heading">18dp</dimen>
+    <dimen name="small_heading">16dp</dimen>
+    <dimen name="fab_bottom_margin_4">4dp</dimen>
+    <dimen name="custom_fab_bottom_margin_55">55dp</dimen>
+    <dimen name="custom_fab_bottom_margin_105">105dp</dimen>
+    <dimen name="custom_fab_standard_21">21dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+
+</resources>

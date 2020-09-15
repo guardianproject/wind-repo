@@ -1,0 +1,1 @@
+Esta app utiliza o Tesseract OCR para reconhecer texto em imagens

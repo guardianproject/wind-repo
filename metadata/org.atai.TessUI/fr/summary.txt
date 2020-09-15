@@ -1,0 +1,1 @@
+Extrait du texte dans les images en utilisant Tesseract OCR

@@ -1,0 +1,151 @@
+Categories:
+  - Sports & Health
+  - Multimedia
+License: MIT
+AuthorEmail: ashutoshgngwr@gmail.com
+WebSite: https://ashutoshgngwr.github.io/noice
+SourceCode: https://github.com/ashutoshgngwr/noice
+IssueTracker: https://github.com/ashutoshgngwr/noice/issues
+Translation: https://github.com/ashutoshgngwr/noice/issues/200
+Changelog: https://github.com/ashutoshgngwr/noice/blob/HEAD/CHANGELOG.md
+OpenCollective: noice
+
+AutoName: Noice
+
+RepoType: git
+Repo: https://github.com/ashutoshgngwr/noice.git
+
+Builds:
+  - versionName: 0.2.5
+    versionCode: 10
+    commit: 0.2.5
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.2.6
+    versionCode: 11
+    commit: 0.2.6
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.2.7
+    versionCode: 12
+    commit: 0.2.7
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.3.1
+    versionCode: 16
+    commit: 0.3.1
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.3.3
+    versionCode: 18
+    commit: 0.3.3
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.3.4
+    versionCode: 19
+    commit: 0.3.4
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.4.0
+    versionCode: 20
+    commit: 0.4.0
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.5.0
+    versionCode: 21
+    commit: 0.5.0
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.6.0
+    versionCode: 22
+    disable: fails to build
+    commit: 0.6.0
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.7.0
+    versionCode: 23
+    commit: 0.7.0
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.7.1
+    versionCode: 24
+    commit: 0.7.1
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.7.2
+    versionCode: 25
+    commit: 0.7.2
+    subdir: app
+    gradle:
+      - yes
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.8.0
+    versionCode: 26
+    commit: 0.8.0
+    subdir: app
+    gradle:
+      - fdroid
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.8.1
+    versionCode: 27
+    commit: 0.8.1
+    subdir: app
+    gradle:
+      - fdroid
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.9.0
+    versionCode: 28
+    commit: 0.9.0
+    subdir: app
+    gradle:
+      - fdroid
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+  - versionName: 0.9.1
+    versionCode: 29
+    commit: 0.9.1
+    subdir: app
+    gradle:
+      - fdroid
+    prebuild: sed -i -e '/signingConfig/d' build.gradle
+
+AutoUpdateMode: Version %v
+UpdateCheckMode: Tags .*[0-9]$
+CurrentVersion: 0.9.1
+CurrentVersionCode: 29

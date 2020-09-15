@@ -1,0 +1,1 @@
+Globális térkép és navigáció offline és online OSM térképekhez

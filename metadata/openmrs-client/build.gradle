@@ -1,0 +1,220 @@
+buildscript {
+
+    repositories {
+        jcenter()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+
+    dependencies {
+        classpath 'com.github.triplet.gradle:play-publisher:2.2.1'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+plugins {
+    id 'com.android.application'
+    id 'com.github.triplet.play' version '2.2.1'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'jacoco-android'
+}
+apply from: './versions.gradle'
+
+def version = versions.appVersion
+def GOOGLE_PLACE_API_KEY = System.getenv('GOOGLE_PLACE_API_KEY') ?: "YOUR_API_KEY"
+
+android {
+    compileSdkVersion versions.compileSdk
+
+    def travisBuildNumber = System.getenv("TRAVIS_BUILD_NUMBER")
+    def buildNumber = (travisBuildNumber) ? (travisBuildNumber as int) : 1
+
+    def applicationVersion = version
+    def travisTag = System.getenv("TRAVIS_TAG")
+    def buildVersionName = (travisTag) ? travisTag : applicationVersion + "-debug." + buildNumber
+
+    defaultConfig {
+        applicationId "org.openmrs.mobile"
+        versionName buildVersionName
+        versionCode buildNumber
+        multiDexEnabled true
+
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        testApplicationId "org.openmrs.mobile.test"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+        manifestPlaceholders = [
+                GOOGLE_PLACE_API_KEY: GOOGLE_PLACE_API_KEY
+        ]
+    }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
+
+    signingConfigs {
+        release {
+            storeFile rootProject.file('release.keystore')
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+            keyAlias System.getenv("KEYSTORE_ALIAS_NAME")
+            keyPassword System.getenv("KEYSTORE_ALIAS_PASS")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            testCoverageEnabled true
+        }
+    }
+
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+        }
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+repositories {
+    maven { url 'http://yanzm.github.io/MaterialTabHost/repository' }
+    mavenCentral()
+    jcenter()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    google()
+}
+
+dependencies {
+
+    implementation "androidx.appcompat:appcompat:${versions.material}"
+    implementation "com.google.android.material:material:${versions.material}"
+    implementation "androidx.legacy:legacy-support-v13:${versions.supportVersion}"
+    implementation "androidx.gridlayout:gridlayout:${versions.supportVersion}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"
+    implementation "androidx.cardview:cardview:${versions.supportVersion}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintlayout}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // Networking and Processing
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofitConverter}"
+    implementation "com.google.code.gson:gson:${versions.gson}"
+
+    // Rx Java dependency
+    implementation "io.reactivex.rxjava2:rxjava:${versions.rxjava}"
+    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxandroid}"
+    implementation "com.jakewharton.rxbinding:rxbinding:${versions.rxbinding}"
+
+    // Database components
+    implementation "androidx.room:room-runtime:${versions.roomRuntime}"
+    implementation "android.arch.persistence.room:rxjava2:${versions.roomPersistence}"
+    // Noinspection GradleDependency
+    annotationProcessor "androidx.room:room-compiler:${versions.roomCompiler}"
+
+    // Work Manager
+    implementation "androidx.work:work-runtime:${versions.workManager}"
+
+    // http request Chuck Library
+    testImplementation "com.readystatesoftware.chuck:library:${versions.chuckLibrary}"
+    debugImplementation "com.readystatesoftware.chuck:library:${versions.chuckLibrary}"
+    releaseImplementation "com.readystatesoftware.chuck:library-no-op:${versions.chuckLibrary}"
+
+    // Third Party UI Libraries
+    implementation "org.adw.library:discrete-seekbar:${versions.seekbar}"
+    implementation "com.github.PhilJay:MPAndroidChart:${versions.MPAndroidChart}"
+    implementation "com.github.amlcurran.showcaseview:library:${versions.showcaseview}"
+    implementation "org.mindrot:jbcrypt:${versions.jbcrypt}"
+    implementation "com.hbb20:ccp:${versions.countryCodePicker}"
+    implementation "com.github.AppIntro:AppIntro:${versions.AppIntro}"
+    implementation 'com.github.yalantis:ucrop:2.2.5'
+
+    // Third Party Performance Libraries
+    implementation "org.permissionsdispatcher:permissionsdispatcher:${versions.permissionsdispatcher}"
+    annotationProcessor "org.permissionsdispatcher:permissionsdispatcher-processor:${versions.permissionsdispatcher}"
+    implementation "androidx.multidex:multidex:${versions.multidex}"
+    implementation "joda-time:joda-time:${versions.jodaTime}"
+    implementation "net.sf.kxml:kxml2:${versions.kxml2}"
+    implementation "commons-codec:commons-codec:${versions.codec}"
+    implementation "org.jdeferred:jdeferred-android-aar:${versions.jdeferred}"
+    implementation "com.google.guava:guava:${versions.guava}"
+
+    // Leak Canary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
+    // Google place api
+    implementation "com.google.android.libraries.places:places:${versions.placesAPI}"
+
+    // Test Implementations
+    androidTestImplementation(
+            'junit:junit:4.12',
+            'androidx.test.ext:junit:1.1.1',
+            'androidx.test.espresso:espresso-core:3.1.0',
+            'androidx.test:rules:1.1.0-alpha4',
+            'androidx.test:runner:1.1.0-alpha4',
+            'org.mockito:mockito-core:2.8.9',
+            'com.google.dexmaker:dexmaker-mockito:1.2',
+            'com.google.dexmaker:dexmaker:1.2',
+            'com.jayway.android.robotium:robotium-solo:4.2',
+            'androidx.arch.core:core-testing:2.0.0'
+    )
+    testImplementation(
+            'org.mockito:mockito-core:2.8.9',
+            'org.mockito:mockito-inline:2.13.0',
+            'junit:junit:4.12',
+            'org.powermock:powermock-api-mockito2:2.0.2',
+            'org.powermock:powermock-module-junit4:2.0.2'
+    )
+    testImplementation "android.arch.core:core-testing:${versions.coreTesting}"
+}
+
+play {
+    enabled = rootProject.file('google_play.json').exists()
+
+    if (version.contains("alpha")) {
+        track = 'alpha'
+    } else if (version.contains("beta")) {
+        track = 'beta'
+    } else {
+        track = 'production'
+    }
+
+    serviceAccountCredentials = rootProject.file('google_play.json')
+    resolutionStrategy = "auto"
+    releaseStatus = "completed"
+
+    outputProcessor { // this: ApkVariantOutput
+        versionNameOverride = "$versionNameOverride.$versionCode"
+    }
+}
