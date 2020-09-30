@@ -1,1 +1,0 @@
-Tato aplikace využívá Tesseract OCR rozpoznání textu v obrazech

@@ -1,1 +1,0 @@
-Balayer des codes à barres sur les produits, ou ceux avec URL, coordonnées, etc.

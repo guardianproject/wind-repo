@@ -1,1 +1,0 @@
-Extract text from images
