@@ -1,0 +1,23 @@
+#!/bin/sh -ex
+
+test -d repo
+
+. ../variables
+
+export http_proxy=http://localhost:55555
+export https_proxy=http://localhost:8081
+export SOCKS_SERVER=localhost:9050
+export PYTHONPATH=$HOME/code/fdroid/fdroidserver
+
+chmod 0600 config.yml
+
+# update APKs and delete any unknown ones, ignore repo_pubkey error
+scripts/update-apks.py
+~/code/fdroid/fdroidserver/fdroid update --verbose --delete-unknown --nosign || true
+
+# get map files and create metadata for any new ones
+scripts/download-osmand-map-files.py
+~/code/fdroid/fdroidserver/fdroid update --verbose --create-metadata
+
+export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
+~/code/fdroid/fdroidserver/fdroid deploy -v
