@@ -1,0 +1,30 @@
+
+repo_url: "https://guardianproject-wind.s3.amazonaws.com/fdroid/repo"
+repo_name: Wind Offline
+repo_icon: icon.png
+repo_description: |
+  This is a collection of apps that work offline or with limited internet.
+
+archive_older: 2
+archive_url: "https://guardianproject-wind.s3.amazonaws.com/fdroid/archive"
+archive_name: Wind Offline Archive
+archive_icon: icon.png
+archive_description: |
+  The repository of older versions of applications from the main repository.
+
+
+mirrors:
+  - https://guardianproject-wind.s3.amazonaws.com/fdroid
+
+awsbucket: guardianproject-wind
+awsaccesskeyid: {env: awsaccesskeyid}
+awssecretkey: {env: awssecretkey}
+
+binary_transparency_remote: 'git@github.com:guardianproject/wind_binary_transparency_log'
+
+make_current_version_link: False
+update_stats: True
+
+keystore: NONE
+keystorepass: {env: keystorepass}
+repo_keyalias: offline
