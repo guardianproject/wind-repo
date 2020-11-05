@@ -21,3 +21,6 @@ scripts/download-osmand-map-files.py
 
 export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
 ~/code/fdroid/fdroidserver/fdroid deploy -v
+
+scripts/update-repo-zipball.py
+
