@@ -27,10 +27,11 @@ update.config = common.read_config(Options)
 update.options = Options
 mirror.options = Options
 
+# order by highest priority first
 source_repos = [
     'https://briarproject.org/fdroid/repo?fingerprint=1FB874BEE7276D28ECB2C9B06E8A122EC4BCB4008161436CE474C257CBF49BD6',
-    'https://f-droid.org/repo?fingerprint=43238D512C1E5EB2D6569F4A3AFBF5523418B82E0A3ED1552770ABB9A9C9CCAB',
     'https://guardianproject.info/fdroid/repo?fingerprint=B7C2EEFD8DAC7806AF67DFCD92EB18126BC08312A7F2D6F3862E46013C7A6135',
+    'https://f-droid.org/repo?fingerprint=43238D512C1E5EB2D6569F4A3AFBF5523418B82E0A3ED1552770ABB9A9C9CCAB',
     'https://apt.izzysoft.de/fdroid/repo?fingerprint=3BF0D6ABFEAE2F401707B6D966BE743BF0EEE49C2561B9BA39073711F628937A',
 ]
 
@@ -74,7 +75,8 @@ apps = metadata.read_metadata()
 
 for app_id in apps.keys():
     found = False
-    for url, data in cache['indexes'].items():
+    for url in source_repos:
+        data = cache['indexes'][url]
         for app in data['apps']:
             if app_id == app['packageName']:
                 from_metadata = apps[app_id]
