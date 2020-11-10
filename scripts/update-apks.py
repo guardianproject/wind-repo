@@ -71,14 +71,19 @@ categories = set()
 find_repo = dict()
 apps_from_repo = dict()
 apps = metadata.read_metadata()
+
 for app_id in apps.keys():
     found = False
     for url, data in cache['indexes'].items():
         for app in data['apps']:
             if app_id == app['packageName']:
                 from_metadata = apps[app_id]
+                newapp = dict()
+                for k, v in app.items():
+                    # convert to field names used in metadata files
+                    newapp[k[0].upper() + k[1:]] = v
                 apps[app_id] = {**app, **from_metadata}
-                categories.update(app.get('Categories', []))
+                categories.update(apps[app_id]['Categories'])
                 baseurl = urlsplit(url)
                 for package in data['packages'].get(app_id):
                     urls.append(urlunsplit([baseurl.scheme,
