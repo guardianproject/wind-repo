@@ -5,7 +5,7 @@ import glob
 import json
 import os
 import sys
-from fdroidserver import common, index, metadata, mirror, update
+from fdroidserver import common, index, metadata, mirror, net, update
 from urllib.parse import urlsplit, urlunsplit
 
 
@@ -20,6 +20,40 @@ class Options:
     pretty = False
     rename_apks = True
     verbose = True
+
+
+def download_graphics(repourl, app):
+    baseurl = urlsplit(repourl)
+    for locale, entries in app.get('localized', {}).items():
+        for k, v in entries.items():
+            dirpath = None
+            dlurl = None
+            if k in ('icon', 'featureGraphic'):
+                dirpath = os.path.join(app['packageName'], locale, v)
+                dlpath = os.path.join('repo', dirpath)
+                dlurl = urlunsplit([baseurl.scheme,
+                                    baseurl.netloc,
+                                    os.path.join(baseurl.path, dirpath),
+                                    None,
+                                    None])
+                if not os.path.exists(dlpath):
+                    print('Downloading', dlurl)
+                    os.makedirs(os.path.dirname(dlpath), exist_ok=True)
+                    net.download_file(dlurl, dlpath)
+            elif k.endswith('Screenshots'):
+                for f in v:
+                    dirpath = os.path.join(app['packageName'], locale, k, f)
+                    dlpath = os.path.join('repo', dirpath)
+                    dlurl = urlunsplit([baseurl.scheme,
+                                        baseurl.netloc,
+                                        os.path.join(baseurl.path, dirpath),
+                                        None,
+                                        None])
+                    if not os.path.exists(dlpath):
+                        print('Downloading', dlurl)
+                        os.makedirs(os.path.dirname(dlpath), exist_ok=True)
+                        net.download_file(dlurl, dlpath)
+
 
 
 REPO_DIR = 'repo'
@@ -94,7 +128,7 @@ for app_id in apps.keys():
                                             os.path.join(baseurl.path, package['apkName']),
                                             None,
                                             None]))
-                # TODO download graphics
+                download_graphics(url, app)
                 found = True
                 break
         if found:
