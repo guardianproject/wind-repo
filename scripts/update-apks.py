@@ -83,6 +83,7 @@ for app_id in apps.keys():
                     # convert to field names used in metadata files
                     newapp[k[0].upper() + k[1:]] = v
                 apps[app_id] = {**app, **from_metadata}
+                apps[app_id]['Categories'] = apps[app_id].get('Categories', []) + ['Offline']
                 categories.update(apps[app_id]['Categories'])
                 baseurl = urlsplit(url)
                 for package in data['packages'].get(app_id):
