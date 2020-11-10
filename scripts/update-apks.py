@@ -18,7 +18,7 @@ class Options:
     no_keep_git_mirror_archive = False
     nosign = True
     pretty = False
-    rename_apks = True
+    rename_apks = False
     verbose = True
 
 
