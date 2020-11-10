@@ -139,11 +139,14 @@ os.chdir(basedir)
 
 knownapks = common.KnownApks()
 apkcache = update.get_cache()
-apks, cache_changed = update.process_apks(apkcache, REPO_DIR, knownapks, True)
-files, file_cache_changed = update.scan_repo_files(apkcache, REPO_DIR, knownapks, True)
+apks, cache_changed = update.process_apks(apkcache, REPO_DIR, knownapks)
+files, file_cache_changed = update.scan_repo_files(apkcache, REPO_DIR, knownapks)
 if cache_changed or file_cache_changed:
     update.write_cache(apkcache)
 
-update.apply_info_from_latest_apk(apps, apks)
+allrepofiles = apks + files
+update.read_added_date_from_all_apks(apps, allrepofiles)
+update.apply_info_from_latest_apk(apps, allrepofiles)
 index.make(apps, apks, REPO_DIR, False)
 update.make_categories_txt(REPO_DIR, categories)
+knownapks.writeifchanged()
