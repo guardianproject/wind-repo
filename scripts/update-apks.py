@@ -38,7 +38,7 @@ basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.chdir(basedir)
 tmpdir = os.path.join(basedir, 'tmp')
 os.makedirs(tmpdir, exist_ok=True)
-cache_file = os.path.join(tmpdir, 'cache.json')
+cache_file = os.path.join(tmpdir, os.path.basename(__file__) + '-cache.json')
 cache = None
 if os.path.exists(cache_file):
     try:
@@ -57,14 +57,14 @@ if not cache:
 for url in source_repos:
     print(url)
     etags = cache['etags']
-    data, etag = index.download_repo_index(url, etags.get('url'))
-    if etag != etags.get(url):
-        etags[url] = etag
-        with open(cache_file, 'w') as fp:
-            json.dump(cache, fp, indent=2, sort_keys=True)
+    data, etag = index.download_repo_index(url, etags.get(url))
     if data is None:
         data = cache['indexes'].get(url)
     cache['indexes'][url] = data
+    if data is not None and etag != etags.get(url):
+        etags[url] = etag
+        with open(cache_file, 'w') as fp:
+            json.dump(cache, fp, indent=2, sort_keys=True)
 
 urls = []
 categories = set()
