@@ -29,7 +29,7 @@ def download_graphics(repourl, app):
             dirpath = None
             dlurl = None
             if k in ('icon', 'featureGraphic'):
-                dirpath = os.path.join(app['packageName'], locale, v)
+                dirpath = os.path.join(app['packageName'], locale, k + v[v.rindex('.'):])
                 dlpath = os.path.join('repo', dirpath)
                 dlurl = urlunsplit([baseurl.scheme,
                                     baseurl.netloc,
