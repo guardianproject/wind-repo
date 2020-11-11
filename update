@@ -1,5 +1,7 @@
 #!/bin/sh -ex
 
+cd $(dirname $0)
+
 test -d repo
 
 . ../variables
