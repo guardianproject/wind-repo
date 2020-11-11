@@ -30,7 +30,7 @@ def download_graphics(repourl, app):
             dlurl = None
             if k in ('icon', 'featureGraphic'):
                 dirpath = os.path.join(app['packageName'], locale, k + v[v.rindex('.'):])
-                dlpath = os.path.join('repo', dirpath)
+                dlpath = os.path.join('metadata', dirpath)
                 dlurl = urlunsplit([baseurl.scheme,
                                     baseurl.netloc,
                                     os.path.join(baseurl.path, dirpath),
@@ -53,7 +53,17 @@ def download_graphics(repourl, app):
                         print('Downloading', dlurl)
                         os.makedirs(os.path.dirname(dlpath), exist_ok=True)
                         net.download_file(dlurl, dlpath)
-
+            elif k in ('summary', 'description'):
+                f = os.path.join('metadata', app['packageName'], locale, k + '.txt')
+                os.makedirs(os.path.dirname(f), exist_ok=True)
+                with open(f, 'w') as fp:
+                    fp.write(v)
+            elif k == 'whatsNew':
+                f = os.path.join('metadata', app['packageName'], locale, 'changelogs',
+                                 '{}.txt'.format(app['suggestedVersionCode']))
+                os.makedirs(os.path.dirname(f), exist_ok=True)
+                with open(f, 'w') as fp:
+                    fp.write(v)
 
 
 REPO_DIR = 'repo'
