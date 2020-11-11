@@ -122,12 +122,16 @@ for app_id in apps.keys():
                 apps[app_id]['Categories'] = apps[app_id].get('Categories', []) + ['Offline']
                 categories.update(apps[app_id]['Categories'])
                 baseurl = urlsplit(url)
+                i = 0
                 for package in data['packages'].get(app_id):
                     urls.append(urlunsplit([baseurl.scheme,
                                             baseurl.netloc,
                                             os.path.join(baseurl.path, package['apkName']),
                                             None,
                                             None]))
+                    i += 1
+                    if i >= update.config['archive_older']:
+                        break
                 download_graphics(url, app)
                 found = True
                 break
