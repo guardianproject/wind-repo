@@ -5,6 +5,7 @@ import glob
 import json
 import os
 import sys
+from datetime import datetime
 from fdroidserver import common, index, metadata, mirror, net, update
 from urllib.parse import urlsplit, urlunsplit
 
@@ -12,7 +13,7 @@ from urllib.parse import urlsplit, urlunsplit
 class Options:
     allow_disabled_algorithms = False
     clean = False
-    delete_unknown = False
+    delete_unknown = True
     identity_file = None
     no_checksum = False
     no_keep_git_mirror_archive = False
@@ -127,10 +128,17 @@ for app_id in apps.keys():
                 newapp = dict()
                 for k, v in app.items():
                     # convert to field names used in metadata files
-                    newapp[k[0].upper() + k[1:]] = v
-                apps[app_id] = {**app, **from_metadata}
-                apps[app_id]['Categories'] = apps[app_id].get('Categories', []) + ['Offline']
-                categories.update(apps[app_id]['Categories'])
+                    if k == 'added':
+                        newapp[k] = datetime.fromtimestamp(int(v) / 1000)
+                    else:
+                        newapp[k[0].upper() + k[1:]] = v
+                for k, v in from_metadata.items():
+                    if not newapp.get(k):
+                        newapp[k] = v
+                newapp['Categories'] = newapp.get('Categories', []) + ['Offline']
+                categories.update(newapp['Categories'])
+                apps[app_id] = metadata.App(newapp)
+
                 baseurl = urlsplit(url)
                 i = 0
                 for package in data['packages'].get(app_id):
@@ -160,6 +168,7 @@ if cache_changed or file_cache_changed:
 
 allrepofiles = apks + files
 update.read_added_date_from_all_apks(apps, allrepofiles)
+update.archive_old_apks(apps, allrepofiles, [], 'repo', 'archive', update.config['archive_older'])
 update.apply_info_from_latest_apk(apps, allrepofiles)
 index.make(apps, apks, REPO_DIR, False)
 update.make_categories_txt(REPO_DIR, categories)

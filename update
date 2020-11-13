@@ -21,7 +21,6 @@ for f in */*.apk; do unzip -l "$f" > /dev/null || rm $f; done
 
 # update APKs and delete any unknown ones, ignore repo_pubkey error
 scripts/update-apks.py
-~/code/fdroid/fdroidserver/fdroid update --verbose --delete-unknown --nosign
 
 # get map files and create metadata for any new ones
 scripts/download-osmand-map-files.py
