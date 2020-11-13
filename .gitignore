@@ -2,9 +2,8 @@
 /archive/
 /binary_transparency/
 /duplicates/
-/metadata/402ee0799d5da535276b5a3672fb049d6df3e1727cfb35369c8962c4a42cac3d.yml
-/metadata/c0a38d7cd0d8603c0053a0e40b13544a845fdd1f2165fa8c7ac9aaea51a4cb76.yml
-/metadata/e5bf1c2b09707cfeb350a37605fa6fb01452af9ca72702b5f49c7024819279c0.yml
+# generated metadata files for *.obf.zip, 64 hex char SHA-256
+/metadata/*0*.yml
 /metadata/*/*/changelogs/*.txt
 /metadata/*/*/description.txt
 /metadata/*/*/featureGraphic.*

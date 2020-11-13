@@ -19,12 +19,11 @@ chmod 0600 config.yml
 # delete any corrupt APKs
 for f in */*.apk; do unzip -l "$f" > /dev/null || rm $f; done
 
-# update APKs and delete any unknown ones, ignore repo_pubkey error
-scripts/update-apks.py
-
 # get map files and create metadata for any new ones
 scripts/download-osmand-map-files.py
-~/code/fdroid/fdroidserver/fdroid update --verbose --create-metadata
+# update APKs and delete any unknown ones, make index
+scripts/fdroid-update-ersatz.py
+~/code/fdroid/fdroidserver/fdroid signindex --verbose
 
 export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
 ~/code/fdroid/fdroidserver/fdroid deploy -v

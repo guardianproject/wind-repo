@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 #
+# TODO this should be implemented as an fdroid plugin
 
 import glob
 import json
 import os
+import re
 import sys
+import yaml
 from datetime import datetime
 from fdroidserver import common, index, metadata, mirror, net, update
 from urllib.parse import urlsplit, urlunsplit
@@ -111,6 +114,30 @@ for url in source_repos:
         etags[url] = etag
         with open(cache_file, 'w') as fp:
             json.dump(cache, fp, indent=2, sort_keys=True)
+
+obf_pat = re.compile(r'metadata/[0-9a-f]{64}\.yml')
+for f in glob.glob(os.path.join('metadata', '*.yml')):
+    if obf_pat.match(f):
+        os.remove(f)
+for f in glob.glob(os.path.join('repo', '*.obf.zip')):
+    print('Creating metadata for OBF file:', f)
+    data = {
+        'AuthorName': 'OsmAnd',
+        'WebSite': 'https://osmand.net',
+        'Name': os.path.basename(f),
+        'Summary': os.path.basename(f)[:-8].replace('_', ' ') + ' offline map for OsmAnd',
+        'Description': (
+            'This file can be downloaded and installed into OsmAnd to provide offline '
+            'maps for the region described in the file name.  '
+            'https://f-droid.org/packages/net.osmand.plus'
+        ),
+        'Categories': [
+            'Offline',
+            'OsmAnd',
+        ],
+    }
+    with open(os.path.join('metadata', update.sha256sum(f) + '.yml'), 'w') as fp:
+        yaml.dump(data, fp)
 
 urls = []
 categories = set()
