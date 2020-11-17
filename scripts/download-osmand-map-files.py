@@ -4,10 +4,12 @@
 
 import os
 import requests
+import shutil
 import sys
 import time
 from clint.textui import progress
 from email.utils import parsedate_to_datetime
+from fdroidserver import update
 
 HEADERS = {'User-Agent': 'F-Droid'}
 
@@ -86,3 +88,8 @@ for f in files:
     print(url)
     local_filepath = os.path.join(basedir, 'repo', f)
     http_get(url, local_filepath)
+    sha256 = update.sha256sum(local_filepath)
+    icon = os.path.join('metadata', sha256, 'en-US', 'icon.png')
+    if not os.path.exists(icon):
+        os.makedirs(os.path.dirname(icon), exist_ok=True)
+        shutil.copy('graphics/%s.png' % f, icon)
