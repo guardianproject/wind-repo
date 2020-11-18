@@ -196,7 +196,7 @@ if cache_changed or file_cache_changed:
 allrepofiles = apks + files
 update.read_added_date_from_all_apks(apps, allrepofiles)
 update.archive_old_apks(apps, allrepofiles, [], 'repo', 'archive', update.config['archive_older'])
-repoapps = prepare_apps(apps, apks, repodirs[0])
-index.make(repoapps, apks, REPO_DIR, False)
+update.apply_info_from_latest_apk(apps, allrepofiles)
+index.make(apps, allrepofiles, REPO_DIR, False)
 update.make_categories_txt(REPO_DIR, categories)
 knownapks.writeifchanged()
