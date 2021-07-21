@@ -1,0 +1,53 @@
+Categories:
+  - Multimedia
+License: LGPL-3.0-only
+AuthorName: The Community Media Toolkit
+AuthorEmail: contact@digitaleconomytoolkit.org
+AuthorWebSite: https://www.digitaleconomytoolkit.org/
+SourceCode: https://github.com/communitymedia/mediaphone
+IssueTracker: https://github.com/communitymedia/mediaphone/issues
+Translation: https://www.transifex.com/communitymedia/mediaphone/
+Changelog: https://github.com/communitymedia/mediaphone/releases
+
+AutoName: Com-Phone
+
+RepoType: git
+Repo: https://github.com/communitymedia/mediaphone
+
+Builds:
+  - versionName: 1.6.3
+    versionCode: 45
+    commit: v1.6.3
+    subdir: MediaPhone
+    submodules: true
+    gradle:
+      - yes
+
+  - versionName: 1.6.4
+    versionCode: 46
+    commit: v1.6.4
+    subdir: MediaPhone
+    submodules: true
+    gradle:
+      - yes
+
+  - versionName: 1.6.5
+    versionCode: 47
+    commit: v1.6.5
+    subdir: MediaPhone
+    submodules: true
+    gradle:
+      - yes
+
+  - versionName: 1.6.6
+    versionCode: 48
+    commit: v1.6.6
+    subdir: MediaPhone
+    submodules: true
+    gradle:
+      - yes
+
+AutoUpdateMode: Version v%v
+UpdateCheckMode: Tags
+CurrentVersion: 1.6.6
+CurrentVersionCode: 48
