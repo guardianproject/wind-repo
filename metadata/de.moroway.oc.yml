@@ -1,0 +1,137 @@
+Categories:
+  - Games
+License: Apache-2.0
+AuthorName: Jonathan Herrmann-Engel
+WebSite: https://moroway.de
+SourceCode: https://github.com/MOROway/moroway-app-oc
+IssueTracker: https://github.com/MOROway/moroway-app-oc/issues
+
+AutoName: MOROway
+
+RepoType: git
+Repo: https://github.com/MOROway/moroway-app-oc
+
+Builds:
+  - versionName: 6.2.0
+    versionCode: 60200
+    commit: v6.2.0
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 6.2.3
+    versionCode: 60203
+    commit: v6.2.3
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 6.2.4
+    versionCode: 60204
+    commit: v6.2.4
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 6.2.5
+    versionCode: 60205
+    commit: v6.2.5
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 6.3.0
+    versionCode: 60300
+    commit: v6.3.0
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 6.3.3
+    versionCode: 60303
+    commit: v6.3.3
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 6.4.0
+    versionCode: 60400
+    commit: v6.4.0
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 6.4.2
+    versionCode: 60402
+    commit: v6.4.2
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.0.0
+    versionCode: 70000
+    commit: v7.0.0
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.0.3
+    versionCode: 70003
+    commit: v7.0.3
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.1.0
+    versionCode: 70100
+    commit: v7.1.0
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.1.1
+    versionCode: 70101
+    commit: v7.1.1
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.1.2
+    versionCode: 70102
+    commit: v7.1.2
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.1.4
+    versionCode: 70104
+    commit: v7.1.4
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.1.7
+    versionCode: 70107
+    commit: v7.1.7
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.2.0
+    versionCode: 70200
+    commit: v7.2.0
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+  - versionName: 7.2.1
+    versionCode: 70201
+    commit: 1d3d04867ed01a41997c19b75b3644281c6d0c94
+    subdir: platforms/android/app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version v%v
+UpdateCheckMode: Tags
+CurrentVersion: 7.2.1
+CurrentVersionCode: 70201
