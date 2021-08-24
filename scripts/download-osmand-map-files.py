@@ -34,7 +34,7 @@ def http_get(url, local_filepath, timeout=600):
         if 'ETag' in r.headers and etag == r.headers['ETag']:
             print(local_filepath, 'is current (%s)' % etag)
             return
-        print('Downloading', local_filepath, etag, r.headers['ETag'])
+        print('Downloading', local_filepath, etag, r.headers.get('ETag'))
     else:
         print('Downloading', local_filepath, etag, None)
 
