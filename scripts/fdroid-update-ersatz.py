@@ -136,7 +136,7 @@ for f in glob.glob(os.path.join('repo', '*.obf.zip')):
             'OsmAnd',
         ],
     }
-    with open(os.path.join('metadata', update.sha256sum(f) + '.yml'), 'w') as fp:
+    with open(os.path.join('metadata', common.sha256sum(f) + '.yml'), 'w') as fp:
         yaml.dump(data, fp)
 
 urls = []
