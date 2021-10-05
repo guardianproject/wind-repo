@@ -1,0 +1,7 @@
+
+yamllint:
+  image: debian:bullseye-slim
+  script:
+    - apt-get update
+    - apt-get -qy install yamllint
+    - yamllint *.yml */*.yml
