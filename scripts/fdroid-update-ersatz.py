@@ -81,6 +81,8 @@ source_repos = [
     'https://guardianproject.info/fdroid/repo?fingerprint=B7C2EEFD8DAC7806AF67DFCD92EB18126BC08312A7F2D6F3862E46013C7A6135',
     'https://f-droid.org/repo?fingerprint=43238D512C1E5EB2D6569F4A3AFBF5523418B82E0A3ED1552770ABB9A9C9CCAB',
     'https://apt.izzysoft.de/fdroid/repo?fingerprint=3BF0D6ABFEAE2F401707B6D966BE743BF0EEE49C2561B9BA39073711F628937A',
+    'https://secfirst.org/fdroid/repo?fingerprint=39EB57052F8D684514176819D1645F6A0A7BD943DBC31AB101949006AC0BC228'
+
 ]
 
 basedir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
