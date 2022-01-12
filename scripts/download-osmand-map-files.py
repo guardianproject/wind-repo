@@ -79,6 +79,9 @@ files = [
     'Puerto-rico_centralamerica_2.obf.zip',
     'Virgin-islands-british_centralamerica_2.obf.zip',
     'Virgin-islands-us_centralamerica_2.obf.zip',
+    'Venezuela_southamerica_2.obf.zip',
+    'Colombia_southamerica_2.obf.zip',
+    'Mexico_mexico_northamerica_2.obf.zip'
 ]
 baseurl = 'https://download.osmand.net/download?standard=yes&file='
 
