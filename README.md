@@ -14,3 +14,12 @@ _metadata/org.havenapp.main.yml_.
 To override the description, name, or summary, add those fields to the
 metadata _.yml_ file, and that will take precedence over what comes
 from the original source repos.
+
+
+## Adding map files
+
+To add more map files:
+
+* Edit the listing in `scripts/download-osmand-map-files.py`.
+* Add 512x512 PNG icon to `graphics/` using the same file name, but with `.png` appended.
+
